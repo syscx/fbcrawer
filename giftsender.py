@@ -42,11 +42,5 @@ def main():
             time.sleep(3)
             driver.quit()
 
-def readpass():
-    path = 'testfileread.txt'
-    with open(path, "r") as file:
-        for line in file:
-            print(line)
-
 if __name__ == '__main__':
     main()
