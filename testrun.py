@@ -3,12 +3,14 @@ import json
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import getpass
+import csv
+import time 
 
-def facebook_login(password):
+def facebook_login(user,password):
     global driver
     driver = webdriver.Chrome()
     driver.get('https://www.facebook.com')
-    driver.find_element_by_id("email").send_keys('s882852@gmail.com')
+    driver.find_element_by_id("email").send_keys(user)
     driver.find_element_by_id("pass").send_keys(password)
     driver.find_element_by_id("loginbutton").click()
 
@@ -21,19 +23,23 @@ def scan_feed():
     feeds = datastore["feed"]["data"]
     return feeds
 
-def access_feed(feeds):
-    print(feeds)
-    #Access feed
-    for fv2link in feeds:
-        driver.implicitly_wait(1)
-        print(fv2link['link'])
-        driver.execute_script("window.open('"+fv2link['link']+"');")
+def access_feed():
+    driver.execute_script("window.open('https://www.google.com');")
 
 def main():
-    user_password = getpass.getpass()
-    facebook_login(user_password)
-    feeds = scan_feed()
-    access_feed(feeds)
+    global driver
+    #driver = webdriver.Chrome()
+    path = 'testfileread.txt'
+    with open(path, "r") as file:
+        reader = csv.reader(file, delimiter=',')
+        for row in reader:
+            driver = webdriver.Chrome()
+            #facebook_login(row[0],row[1])
+            #feeds = scan_feed()
+            access_feed()
+            access_feed()
+            time.sleep(3)
+            driver.quit()
 
 def readpass():
     path = 'testfileread.txt'
