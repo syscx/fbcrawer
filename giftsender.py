@@ -39,7 +39,7 @@ def main():
             facebook_login(row[0],row[1])
             feeds = scan_feed()
             access_feed(feeds)
-            time.sleep(3)
+            time.sleep(100)
             driver.quit()
 
 if __name__ == '__main__':
