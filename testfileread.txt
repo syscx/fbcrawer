@@ -1,2 +1,2 @@
-@ntu.edu.tw,x
-@gmail.com,x
+r94548057@ntu.edu.tw,a
+s882852@hotmail.com,b
