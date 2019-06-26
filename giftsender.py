@@ -2,9 +2,11 @@ from urllib.request import urlopen
 import json
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.options import Options
 import getpass
 import csv
-import time 
+import time
+import sys
 
 def facebook_login(user,password):
     driver.get('https://www.facebook.com')
@@ -22,12 +24,17 @@ def scan_feed():
     return feeds
 
 def access_feed(feeds):
-    print(feeds)
     #Access feed
+    count = 0
     for fv2link in feeds:
+        count=count + 1
         driver.implicitly_wait(1)
-        print(fv2link['link'])
         driver.execute_script("window.open('"+fv2link['link']+"');")
+        #debug mode
+        #driver.switch_to.window(driver.window_handles[count])#0+fb magic number
+        #driver.implicitly_wait(3)
+        #print("capture"+str(count)+".png")
+        #driver.get_screenshot_as_file("capture"+str(count)+".png")
 
 def main():
     global driver
@@ -35,7 +42,10 @@ def main():
     with open(path, "r") as file:
         reader = csv.reader(file, delimiter=',')
         for row in reader:
-            driver = webdriver.Chrome()
+            #driver = webdriver.Chrome()
+            options = Options()
+            options.headless = True
+            driver = webdriver.Chrome(options=options)
             facebook_login(row[0],row[1])
             feeds = scan_feed()
             access_feed(feeds)
