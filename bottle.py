@@ -6,8 +6,6 @@ import csv
 import time 
 
 def facebook_login(user,password):
-    global driver
-    driver = webdriver.Chrome()
     driver.get('https://www.facebook.com')
     driver.find_element_by_id("email").send_keys(user)
     driver.find_element_by_id("pass").send_keys(password)
@@ -38,6 +36,10 @@ def get_bottles():
 
 def main():
     p = getpass.getpass()
+    global driver
+    options = Options()
+    options.headless = True
+    driver = webdriver.Chrome(options=options)
     facebook_login('f93525048@ntu.edu.tw',p)
     load_bottleTop()
     parse_getBottle()
