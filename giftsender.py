@@ -7,12 +7,7 @@ import getpass
 import csv
 import time
 import sys
-
-def facebook_login(user,password):
-    driver.get('https://www.facebook.com')
-    driver.find_element_by_id("email").send_keys(user)
-    driver.find_element_by_id("pass").send_keys(password)
-    driver.find_element_by_id("loginbutton").click()
+import fblib
 
 def scan_feed():
 #Scan feed
@@ -46,7 +41,7 @@ def main():
             options = Options()
             options.headless = True
             driver = webdriver.Chrome(options=options)
-            facebook_login(row[0],row[1])
+            fblib.facebook_login(driver,row[0],row[1])
             feeds = scan_feed()
             access_feed(feeds)
             time.sleep(100)
