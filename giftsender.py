@@ -7,7 +7,8 @@ import getpass
 import csv
 import time
 import sys
-import fblib
+from fblib.fbfunct import facebook_login
+from fblib.bottlelib import *
 
 def scan_feed():
 #Scan feed
@@ -41,7 +42,7 @@ def main():
             options = Options()
             options.headless = True
             driver = webdriver.Chrome(options=options)
-            fblib.facebook_login(driver,row[0],row[1])
+            facebook_login(driver,row[0],row[1])
             feeds = scan_feed()
             access_feed(feeds)
             time.sleep(100)
