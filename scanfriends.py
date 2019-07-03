@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys 
 from selenium.webdriver.chrome.options import Options
 import getpass
-import fblib
+from fblib.fbfunct import facebook_login
 
 option = Options()
 
@@ -16,8 +16,8 @@ option.add_experimental_option("prefs", {
 })
 
 p = getpass.getpass()
-driver = webdriver.Chrome(chrome_options=option)
-fblib.facebook_login(driver,'f93525048@ntu.edu.tw',p)
+driver = webdriver.Chrome(options=option)
+facebook_login(driver,'f93525048@ntu.edu.tw',p)
 checking_list = ["evening.tkc", "chou.wang.39", "wang.leox"]
 i = 0
 while i < len(checking_list):
